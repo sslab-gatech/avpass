@@ -10,15 +10,17 @@ Visit the main directory of repository and run the script. It will install all n
 ```
 
 If this script doesn't work for your envorinment and if you find any problem regarding library, you can install these libraries manually. Don't worry. We didn't use many libraries. These are the list:
-
-  * main problem (python2): https://www.python.org/downloads/
+  
   * apktool: https://ibotpeaches.github.io/Apktool/
   * numpy: http://www.numpy.org/
   * PIL: http://www.pythonware.com/products/pil/
   * magic: https://pypi.python.org/pypi/python-magic
   * python-utils: https://pypi.python.org/pypi/python-utils/2.1.0
+  * vt: https://pypi.python.org/pypi/virustotal-api
 
 # Obfuscate invividual APK
+
+## Change configuration
 
 Let's start from obfuscating individual APK. First you need to set up your obfuscation. If you don't want, you can simply use default obfuscations which only include Java reflection, String encryption, Variable encryption, Package name change, Method name change, Class name change, and Resource obfuscation. 
 
@@ -56,15 +58,47 @@ OBFUSCATION_LIST = [API_REFLECTION, STRING, VARIABLE, PCM, \
 # Inferring Group
 INFERRING_LIST  = [API_REFLECTION, STRING, VARIABLE, PCM, BENIGN_CLASS, \
                    RESOURCE_IMAGE+RESOURCE_XML, RM_PERMISSION]
-
 ```
 
-* Trouble with running after obfuscation?
+We pre-defined several obfuscation modules here. You can modify `OBFUSCATION_LIST` for your obfuscation. Note that the order of list is the same as the order of obfuscation. For example, this configuration will start obfuscation from `Java Reflection`. 
 
-The most frequent problem was signing the APK after obfuscation. 
+## Launch individual obfuscation
+
+Let's test with example. Copy `facebook_opt.apk` malware into your `src` directory. Then run this script:
+
+``` bash
+$ python gen_disguise.py -i facebook_opt.apk individual
+```
+
+Then you will see `facebook_opt_obfus.apk` file. 
+
+## Check your obfuscated malware to VirusTotal
+
+You can query obfuscated malware to VirusTotal by using web interface (https://www.virustotal.com/). However, it's slow and difficult to automate. To make your life easier, we recommend you to acquire VirusTotal API and use command line interface. To know more information about VirusTotal, please visit this site: https://www.virustotal.com/nl/documentation/public-api/
+
+Going back to the topic, you can query in console:
+
+``` bash
+$ vt -f facebook_opt_obfus.apk -j 
+```
+
+After about one minute, your can query the result using command:
+
+``` bash
+$ vt -fs facebook_opt_obfus.apk -j 
+```
+
+Finally, you will get result file (JSON format) and check which AV detected your obfuscated malware. 
+
+## Trouble with running after obfuscation?
+
+One most frequent problem happens due to missing sign the APK after obfuscation. To make the obfuscated APK runnable, you should do `zipalign` and `sign` the APK. 
+
+- How to zipalign: https://developer.android.com/studio/command-line/zipalign.html
+- How to sign apk: https://developer.android.com/studio/publish/app-signing.html
 
 
-3. Generate malware variation
+# Generate malware variation
 
 4. Inferring AV's rules
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="1" android:versionName="1.0" package="com.coffee.coffeecup" platformBuildVersionCode="25" platformBuildVersionName="7.1.1"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="coffeecup" android:allowBackup="true" android:supportsRtl="true">
+        <activity android:name="com.coffee.coffeecup.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

@@ -1,0 +1,256 @@
+nop
+move data32,data32
+move/from16 data32,data32
+move/16 data32,data32
+move-wide data64,data64
+move-wide/from16 data64,data64
+move-wide/16 data64,data64
+move-object object,object
+move-object/from16 object,object
+move-object/16 object,object
+move-result data32
+move-result-wide data64
+move-result-object object
+move-exception object
+return-void
+return data32
+return-wide data64
+return-object object
+const/4 data32
+const/16 data32
+const data32
+const/high16 data32
+const-wide/16 data64
+const-wide/32 data64
+const-wide data64
+const-wide/high16 data64
+const-string object
+const-string-jumbo object
+const-class object
+monitor-enter object
+monitor-exit undefined
+check-cast object
+instance-of data32,object
+array-length data32,object
+new-instance object
+new-array object,data32
+filled-new-array passes
+filled-new-array-range pass,pass
+fill-array-data object
+throw object
+goto
+goto/16
+goto/32
+packed-switch pass
+sparse-switch pass
+cmpl-float data32,data32,data32
+cmpg-float data32,data32,data32
+cmpl-double data32,data64,data64
+cmpg-double data32,data64,data64
+cmp-long data32,data64,data64
+if-eq data32,data32
+if-ne data32,data32
+if-lt data32,data32
+if-ge data32,data32
+if-gt data32,data32
+if-le data32,data32
+if-eqz data32
+if-nez data32
+if-ltz data32
+if-gez data32
+if-gtz data32
+if-lez data32
+unused_3E
+unused_3F
+unused_40
+unused_41
+unused_42
+unused_43
+aget data32,object,data32
+aget-wide data64,object,data32
+aget-object object,object,data32
+aget-boolean data32,object,data32
+aget-byte data32,object,data32
+aget-char data32,object,data32
+aget-short data32,object,data32
+aput data32,object,data32
+aput-wide data64,object,data32
+aput-object object,object,data32
+aput-boolean data32,object,data32
+aput-byte data32,object,data32
+aput-char data32,object,data32
+aput-short data32,object,data32
+iget data32,object
+iget-wide data64,object
+iget-object object,object
+iget-boolean data32,object
+iget-byte data32,object
+iget-char data32,object
+iget-short data32,object
+iput data32,object
+iput-wide data64,object
+iput-object object,object
+iput-boolean data32,object
+iput-byte data32,object
+iput-char data32,object
+iput-short data32,object
+sget data32
+sget-wide data64
+sget-object object
+sget-boolean data32
+sget-byte data32
+sget-char data32
+sget-short data32
+sput data32
+sput-wide data64
+sput-object object
+sput-boolean data32
+sput-byte data32
+sput-char data32
+sput-short data32
+invoke-virtual passes
+invoke-super passes
+invoke-direct passes
+invoke-static passes
+invoke-interface passes
+unused_73
+invoke-virtual/range pass,pass
+invoke-super/range pass,pass
+invoke-direct/range pass,pass
+invoke-static/range pass,pass
+invoke-interface/range pass,pass
+unused_79
+unused_7A
+neg-int data32,data32
+not-int data32,data32
+neg-long data64,data64
+not-long data64,data64
+neg-float data32,data32
+neg-double data64,data64
+int-to-long data64,data32
+int-to-float data32,data32
+int-to-double data64,data32
+long-to-int data32,data64
+long-to-float data32,data64
+long-to-double data64,data64
+float-to-int data32,data32
+float-to-long data64,data32
+float-to-double data64,data32
+double-to-int data32,data64
+double-to-long data64,data64
+double-to-float data32,data64
+int-to-byte data32,data32
+int-to-char data32,data32
+int-to-short data32,data32
+add-int data32,data32,data32
+sub-int data32,data32,data32
+mul-int data32,data32,data32
+div-int data32,data32,data32
+rem-int data32,data32,data32
+and-int data32,data32,data32
+or-int data32,data32,data32
+xor-int data32,data32,data32
+shl-int data32,data32,data32
+shr-int data32,data32,data32
+ushr-int data32,data32,data32
+add-long data64,data64,data64
+sub-long data64,data64,data64
+mul-long data64,data64,data64
+div-long data64,data64,data64
+rem-long data64,data64,data64
+and-long data64,data64,data64
+or-long data64,data64,data64
+xor-long data64,data64,data64
+shl-long data64,data64,data64
+shr-long data64,data64,data64
+ushr-long data64,data64,data64
+add-float data32,data32,data32
+sub-float data32,data32,data32
+mul-float data32,data32,data32
+div-float data32,data32,data32
+rem-float data32,data32,data32
+add-double data64,data64,data64
+sub-double data64,data64,data64
+mul-double data64,data64,data64
+div-double data64,data64,data64
+rem-double data64,data64,data64
+add-int/2addr data32,data32
+sub-int/2addr data32,data32
+mul-int/2addr data32,data32
+div-int/2addr data32,data32
+rem-int/2addr data32,data32
+and-int/2addr data32,data32
+or-int/2addr data32,data32
+xor-int/2addr data32,data32
+shl-int/2addr data32,data32
+shr-int/2addr data32,data32
+ushr-int/2addr data32,data32
+add-long/2addr data64,data64
+sub-long/2addr data64,data64
+mul-long/2addr data64,data64
+div-long/2addr data64,data64
+rem-long/2addr data64,data64
+and-long/2addr data64,data64
+or-long/2addr data64,data64
+xor-long/2addr data64,data64
+shl-long/2addr data64,data64
+shr-long/2addr data64,data64
+ushr-long/2addr data64,data64
+add-float/2addr data32,data32
+sub-float/2addr data32,data32
+mul-float/2addr data32,data32
+div-float/2addr data32,data32
+rem-float/2addr data32,data32
+add-double/2addr data64,data64
+sub-double/2addr data64,data64
+mul-double/2addr data64,data64
+div-double/2addr data64,data64
+rem-double/2addr data64,data64
+add-int/lit16 data32,data32
+sub-int/lit16 data32,data32
+mul-int/lit16 data32,data32
+div-int/lit16 data32,data32
+rem-int/lit16 data32,data32
+and-int/lit16 data32,data32
+or-int/lit16 data32,data32
+xor-int/lit16 data32,data32
+add-int/lit8 data32,data32
+sub-int/lit8 data32,data32
+mul-int/lit8 data32,data32
+div-int/lit8 data32,data32
+rem-int/lit8 data32,data32
+and-int/lit8 data32,data32
+or-int/lit8 data32,data32
+xor-int/lit8 data32,data32
+shl-int/lit8 data32,data32
+shr-int/lit8 data32,data32
+ushr-int/lit8 data32,data32
+unused_E3
+unused_E4
+unused_E5
+unused_E6
+unused_E7
+unused_E8
+unused_E9
+unused_EA
+unused_EB
+unused_EC
+unused_ED
+execute-inline passes
+unused_EF
+invoke-direct-empty
+unused_F1
+iget-quick data32,pass
+iget-wide-quick data64,pass
+iget-object-quick object,pass
+iput-quick pass,vy
+iput-wide-quick pass,vy
+iput-object-quick pass,vy
+invoke-virtual-quick passes
+invoke-virtual-quick/range passes
+invoke-super-quick passes
+invoke-super-quick/range passes
+unused_FC
+unused_FD
+unused_FE
+unused_FF

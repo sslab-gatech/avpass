@@ -1,0 +1,19 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: empty.apk
+compressionType: false
+doNotCompress: null
+isFrameworkApk: false
+packageInfo: null
+sdkInfo:
+  minSdkVersion: '9'
+  targetSdkVersion: '25'
+sharedLibrary: false
+unknownFiles: {}
+usesFramework:
+  ids:
+  - 1
+  tag: null
+version: 2.2.2
+versionInfo:
+  versionCode: '1'
+  versionName: '1.0'

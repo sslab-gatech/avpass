@@ -1,0 +1,9 @@
+*.swp
+*.pyc
+*.apk
+*.pkl
+/doc_bak
+/in
+/infer_Ex
+/lib_backup
+/out

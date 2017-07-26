@@ -5,7 +5,7 @@ For the initial version of AVPASS, we assumes that user is using Linux or MAC. H
 
 Visit the main directory of repository and run the script. It will install all necessary libraries. 
 
-```
+``` python
 ./install-dep.sh
 ```
 
@@ -69,7 +69,7 @@ We pre-defined several obfuscation modules here. You can modify `OBFUSCATION_LIS
 
 Let's test with example. Copy `facebook_opt.apk` malware into your `src` directory. Then run this script:
 
-``` 
+``` python
 # generate one individual obfuscated APK
 $ python gen_disguise.py -i facebook_opt.apk individual
 ```
@@ -211,8 +211,52 @@ ____
 
 ## What is *Imitation Mode*?
 
-## How to use?
+This is inverse of feature obfuscation. It other word, this mode adds malware's features to a empty application until we can find a set of obfuscation features to be detected. 
+
+Assumes that you developed a malware and already obfuscated. You can query the APK to the VirusTotal but cannot guarantee 100% bypass. To support safe query in this situation, developer can use *Imitation Mode*. If obfuscated malware still has suspicious feature in `resource`, then the develop can incorporate the feature into fake malware automatically with the help of *Imitation Mode*. Once the developer queries the fake malware and confirms detections when the developer includes `resource`, then the developer proactively modify `resource` section. 
+
+## Preparation 
 
 To use `Imitation Mode`, you have to define your own template for accurate test result. The step by step for this is available in [How to make own template](Template.md)
 
-## 
+Our empty APK templates are already registered as malicious pattern from multiple AV companies even though there was nothing in there! To handle this issue, we also changes empty APK template frequently. If you get multiple detections from AV company even though you didn't include anything, it means that you should change your template for better result. 
+
+## Run *Imitation Mode*
+
+Running is also easy. Run the below script. In this example, we picked up one obfuscated malware from malware variation generation process. In addition, we assumed that you finished generation of your own empty template APK. (name as empty.apk)
+
+```
+# run imitation mode and generate fake variations
+# i: input file, -e name of empty APK, -n number of features when generate
+python gen_imitation.py -i LifeMon.apk -e empty.apk -n 2
+
+```
+
+After finish the process, *Imitation Mode* will generate series of files. 
+
+```
+$ ls -1 |grep *.apk
+LifeMon_24_0000011.apk
+LifeMon_24_0000101.apk
+LifeMon_24_0000110.apk
+LifeMon_24_0001001.apk
+LifeMon_24_0001010.apk
+LifeMon_24_0001100.apk
+LifeMon_24_0010001.apk
+LifeMon_24_0010010.apk
+LifeMon_24_0010100.apk
+LifeMon_24_0011000.apk
+LifeMon_24_0100001.apk
+LifeMon_24_0100010.apk
+LifeMon_24_0100100.apk
+LifeMon_24_0101000.apk
+LifeMon_24_0110000.apk
+LifeMon_24_1000001.apk
+LifeMon_24_1000010.apk
+LifeMon_24_1000100.apk
+LifeMon_24_1001000.apk
+LifeMon_24_1010000.apk
+LifeMon_24_1100000.apk
+```
+
+Here, `0` indicates that the specific feature has not included into the fake malware, whereas `1` indicates that the feature has included. By using the same query step, the malware developer can see which features are still detected by AV. 

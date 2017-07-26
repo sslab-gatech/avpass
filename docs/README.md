@@ -18,7 +18,7 @@ If this script doesn't work for your envorinment and if you find any problem reg
   * python-utils: https://pypi.python.org/pypi/python-utils/2.1.0
   * vt: https://pypi.python.org/pypi/virustotal-api
 
-----
+____
 
 
 # Obfuscate individual APK
@@ -100,6 +100,7 @@ One most frequent problem happens due to missing sign the APK after obfuscation.
 - How to zipalign: https://developer.android.com/studio/command-line/zipalign.html
 - How to sign apk: https://developer.android.com/studio/publish/app-signing.html
 
+____
 
 # Generate malware variation
 
@@ -108,11 +109,31 @@ To infer rules by using 2k factorial experiments, you need to put your malware a
 - DREBIN: https://www.sec.cs.tu-bs.de/~danarp/drebin/
 - VirusShare: https://virusshare.com/
 
-First, make input directory and copy your malware into the directory. 
+First, make input and output directory and copy your malware into the directory. Check your `conf.py` to include or exclude necessary obfuscations. Then execute `gen_variations.py` script. For example:
 
-4. Inferring AV's rules
+```
+$ cd src
+$ mkdir input
+$ mkdir output
 
-5. Obfuscate by using inferred rules
+MODIFY YOUR conf.py
 
-6. Imitation Mode support 
+$ cp YOUR_MALWARE ./input/
+$ python gen_variations -i input -o output
+```
+
+We recommend you to use at least 100 malware to infer detection rule combinations of AVs. 
+
+____
+
+# Inferring AV's rules
+
+
+____
+# Obfuscate by using inferred rules
+
+
+____
+# Imitation Mode support 
+
 To use `Imitation Mode`, you have to define your own template for accurate test result. The step by step for this is available in [How to make own template](Template.md)

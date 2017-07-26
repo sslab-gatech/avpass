@@ -412,7 +412,6 @@ def do_add(source_dir, empty_dir, out_dir, flag):
     flag_bin = bin(flag)[2:]
     flag_bin = '0' * (7 - len(flag_bin)) + flag_bin
     pack_apk(out_dir, source_dir + '_' + flag_bin  + '.apk')
-    #os.system('rm -rf temp_{}'.format(source_dir))
     os.system('rm -rf {}'.format(out_dir))
 
 

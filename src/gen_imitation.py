@@ -8,20 +8,6 @@ sys.path.append('./modules/imitation')
 import feature_extract
 import feature_insert
 
-""" MEMO 
-1. generation of empty APK 
-    There must be "MainActivity" in an empty apk.
-    In MainActivity, There must be onCreate() method.
-2. remove external python execution if possible
-    DONE
-3. remove bash command like mkdir or rm (can use python lib for windows)
-    possible but could be meaningless.
-    shell scripts used in feature extraction uses shell commands and sed. So
-    anyway we need unix environment or whole shell scripts need to be replaced
-    with python script (possible)
-4. incorporate conf.py if possible because user will define own
-   inferring_feature list
-"""
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

@@ -33,11 +33,11 @@ RM_PERMISSION       = "python api.py   -f {1}.apk permission -c no;"
 
 
 # Obfuscation Group for individual APK disguise
-OBFUSCATION_LIST = [API_REFLECTION, STRING]
+OBFUSCATION_LIST = [API_REFLECTION, STRING, VARIABLE, PCM, \
+                   RESOURCE_IMAGE+RESOURCE_XML]
 
 
 # Inferring Group
 INFERRING_LIST  = [API_REFLECTION, STRING, VARIABLE, PCM, BENIGN_CLASS, \
                    RESOURCE_IMAGE+RESOURCE_XML, RM_PERMISSION]
 
-#INFERRING_LIST = [API_REFLECTION, STRING]

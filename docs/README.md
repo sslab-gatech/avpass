@@ -5,7 +5,7 @@ For the initial version of AVPASS, we assumes that user is using Linux or MAC. H
 
 Visit the main directory of repository and run the script. It will install all necessary libraries. 
 
-``` python
+``` 
 ./install-dep.sh
 ```
 
@@ -69,7 +69,7 @@ We pre-defined several obfuscation modules here. You can modify `OBFUSCATION_LIS
 
 Let's test with example. Copy `facebook_opt.apk` malware into your `src` directory. Then run this script:
 
-``` python
+``` 
 # generate one individual obfuscated APK
 $ python gen_disguise.py -i facebook_opt.apk individual
 ```

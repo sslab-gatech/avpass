@@ -18,7 +18,10 @@ If this script doesn't work for your envorinment and if you find any problem reg
   * python-utils: https://pypi.python.org/pypi/python-utils/2.1.0
   * vt: https://pypi.python.org/pypi/virustotal-api
 
-# Obfuscate invividual APK
+----
+
+
+# Obfuscate individual APK
 
 ## Change configuration
 
@@ -99,6 +102,13 @@ One most frequent problem happens due to missing sign the APK after obfuscation.
 
 
 # Generate malware variation
+
+To infer rules by using 2k factorial experiments, you need to put your malware as seed. Do you have malware samples? We recommend you to download samples from here. Note that we should use malware from different family for better inferring result. 
+
+- DREBIN: https://www.sec.cs.tu-bs.de/~danarp/drebin/
+- VirusShare: https://virusshare.com/
+
+First, make input directory and copy your malware into the directory. 
 
 4. Inferring AV's rules
 

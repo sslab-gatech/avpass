@@ -4,6 +4,6 @@
 *.pkl
 /doc_bak
 /in
-/infer_Ex
+/infer_ex
 /lib_backup
 /out

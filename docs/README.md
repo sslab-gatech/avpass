@@ -69,7 +69,8 @@ We pre-defined several obfuscation modules here. You can modify `OBFUSCATION_LIS
 
 Let's test with example. Copy `facebook_opt.apk` malware into your `src` directory. Then run this script:
 
-``` bash
+``` 
+# generate one individual obfuscated APK
 $ python gen_disguise.py -i facebook_opt.apk individual
 ```
 
@@ -81,13 +82,15 @@ You can query obfuscated malware to VirusTotal by using web interface (https://w
 
 Going back to the topic, you can query in console:
 
-``` bash
+``` 
+# Upload obfuscated APK
 $ vt -f facebook_opt_obfus.apk -j 
 ```
 
 After about one minute, your can query the result using command:
 
-``` bash
+```
+# Check the result
 $ vt -fs facebook_opt_obfus.apk -j 
 ```
 
@@ -104,12 +107,16 @@ ____
 
 # Generate malware variation
 
+## Collecting malware
+
 To infer rules by using 2k factorial experiments, you need to put your malware as seed. Do you have malware samples? We recommend you to download samples from here. Note that we should use malware from different family for better inferring result. 
 
 - DREBIN: https://www.sec.cs.tu-bs.de/~danarp/drebin/
 - VirusShare: https://virusshare.com/
 
-First, make input and output directory and copy your malware into the directory. Check your `conf.py` to include or exclude necessary obfuscations. Then execute `gen_variations.py` script. For example:
+## Setup
+
+First, make input and output directory and copy your malware into the directory. Check your `conf.py` to include or exclude necessary obfuscations. Especially, you should modify `INFERRING_LIST` to define your obfuscation. Then execute `gen_variations.py` script. For example:
 
 ```
 $ cd src
@@ -122,18 +129,90 @@ $ cp YOUR_MALWARE ./input/
 $ python gen_variations -i input -o output
 ```
 
-We recommend you to use at least 100 malware to infer detection rule combinations of AVs. 
+## Query to VirusTotal
 
+We recommend you to use at least 100 malware to infer detection rule combinations of AVs. Assume that you are obfuscating 100 malware with 7 obfuscation groups. For this case, AVPASS will generate 100 * 128 malware variations. We observed that such a large number malware generation takes several hours or days.
+
+Did you finish variation generation? If yes, you can query the variations to VirusTotal. Since AVPASS knows about obfuscation by reading filename, you should not change obfuscated filename. You can use these commands to query and get result. 
+
+```
+# upload your APK
+$ vt -f *.apk -j
+
+After uploading all APKs
+
+# download queried result
+$ vt -fs *.apk -j
+```
+
+Now you downloaded all queried result of variations. Let's infer detection rules.
 ____
 
 # Inferring AV's rules
 
+## Assumption
 
+1. Generated malware variations and queried the result from VirusTotal
+2. Malware variation (APK) and queried result (JSON) are at the same directory
+
+## Inferring
+
+Once you finished query, inferring is simple! Run this script. Please make sure whether you satisfied the assumption above before run the script. 
+
+```
+# infer rules, assume that output directory has both APK and JSON
+$ python infer_rules.py -i output
+```
+
+What can you see? You can see inferred rule combinations for each AV and also can check whether `inferred_rules.pkl` is generated. Well done so far! It's time to use inferred rule to bypass AV. 
 ____
+
 # Obfuscate by using inferred rules
 
+You can do targeted obfuscation using this command:
 
+```
+# Run targeted obfuscation
+$ python gen_disguise -i YOUR_MALWARE withrule -o OUTPUT_DIR
+```
+
+If there is no problem so far, you will see this question from command line. 
+
+```
+===========
+  AVLIST   
+===========
+0.Bkav 1.K7AntiVirus 2.MicroWorld-eScan 3.nProtect 4.CMC
+5.CAT-QuickHeal 6.ALYac 7.Malwarebytes 8.Zillya 9.AegisLab
+10.TheHacker 11.BitDefender 12.K7GW 13.Trustlook 14.Arcabit
+15.Baidu 16.F-Prot 17.SymantecMobileInsight 18.Symantec 19.TotalDefense
+20.TrendMicro-HouseCall 21.Avast 22.ClamAV 23.Kaspersky 24.Alibaba
+25.NANO-Antivirus 26.ViRobot 27.Rising 28.Ad-Aware 29.Emsisoft
+30.Comodo 31.F-Secure 32.DrWeb 33.VIPRE 34.TrendMicro
+35.McAfee-GW-Edition 36.Sophos 37.Cyren 38.Jiangmin 39.Webroot
+40.Avira 41.Antiy-AVL 42.Kingsoft 43.Microsoft 44.SUPERAntiSpyware
+45.ZoneAlarm 46.GData 47.AhnLab-V3 48.McAfee 49.AVware
+50.VBA32 51.WhiteArmor 52.Zoner 53.ESET-NOD32 54.Tencent
+55.Yandex 56.Ikarus 57.Fortinet 58.AVG 59.Panda
+60.CrowdStrike 61.Qihoo-360
+
+
+Which AVs do you want to bypass? (all or numbers)
+  e.x) all
+  e.x) 1 3 4 5
+Input your selection: 1 5 33 42
+
+```
+
+Select multiple numbers that you want to bypass or just type `all` to bypass them all. Your obfuscated APK will be stored in `OUTPUT_DIR`
 ____
+
 # Imitation Mode support 
 
+## What is *Imitation Mode*?
+
+## How to use?
+
 To use `Imitation Mode`, you have to define your own template for accurate test result. The step by step for this is available in [How to make own template](Template.md)
+
+## 

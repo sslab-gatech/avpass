@@ -39,10 +39,11 @@ Authors and Contact
 -------------------
 
 These are the list of contributors for implementing AVPASS:
-Jinho Jung
-Chanil Jeon
-Max Wolotsky
-Insu Yun
+
+- Jinho Jung
+- Chanil Jeon
+- Max Wolotsky
+- Insu Yun
 
 Send us email for any questions. 
 

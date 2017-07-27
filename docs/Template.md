@@ -5,7 +5,7 @@ Basically what you should do is to make an empty apk which contains ```MainActiv
 
 Start a new project.
 
-<img src="https://github.com/sslab-gatech/avpass/blob/master/docs/image/imitation1.png" alt="" width="500" align="middle">
+<img src="https://github.com/sslab-gatech/avpass/blob/master/docs/image/imitation1.png" alt="" width="500" align="center">
 
 Put some random names in Application name and Company domain. If you send this empty apk to VirusTotal frequently (with some malicious features injected to it) it is likely that your application name and company domain are registered as malicious signatures by AV companies. So create a new empty apk with different names and domains after send it to VirusTotal.
 

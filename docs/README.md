@@ -1,7 +1,7 @@
 
 # Installation
 
-For the initial version of AVPASS, we assumes that user is using Linux or MAC. However, since we tried to avoid using OS specific commands or libraries, we will support Windows users in the near future. 
+For the initial version of AVPASS, we assumes that user is using Linux or Mac. However, since we tried to avoid using OS specific commands or libraries, we will support Windows users in the near future. 
 
 Visit the main directory of repository and run the script. It will install all necessary libraries. 
 
@@ -260,3 +260,15 @@ LifeMon_24_1100000.apk
 ```
 
 Here, `0` indicates that the specific feature has not included into the fake malware, whereas `1` indicates that the feature has included. By using the same query step, the malware developer can see which features are still detected by AV. 
+
+# Limitations
+
+AVPASS has several limitation that you should know. 
+
+- AVPASS does not handle payload inside (especially APK/JAR/so/ZIP files in /resource, /assets, /libs). We recommend the developer to develop code inside of your class as possible and then AVPASS will obfuscate your code. 
+
+- AVPASS is vulnerable to dynamic analysis. No matter how much you obfuscate, dynamic analysis will eventually find out original intention. 
+
+- AVPASS itself can be malicious pattern in the near future as many developer use it. To handle this, we recommend you to change ROT function inside of `common.py` and empty APK template. 
+
+- There are several cases when you incremantally obfuscate your APK and failed to execute run. This is also problem to us and try to fix several issues one by one. 

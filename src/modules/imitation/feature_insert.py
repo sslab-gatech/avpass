@@ -396,7 +396,7 @@ def insert_resource(source, out, flag):
 
 
 def do_add(source_dir, empty_dir, out_dir, flag):
-    os.system('cp -r {} temp_{}'.format(empty_dir, source_dir))
+    os.system('cp -r {} {}'.format(empty_dir, out_dir))
 
     if flag & ADD_PACKAGE:  insert_package(source_dir, out_dir, flag)
     if flag & ADD_CLASS:    
@@ -408,8 +408,11 @@ def do_add(source_dir, empty_dir, out_dir, flag):
     if flag & ADD_PERMISSION: insert_permission(source_dir, out_dir, flag)
     if flag & ADD_RESOURCE: insert_resource(source_dir, out_dir, flag)
 
-    pack_apk(out_dir, source_dir + '_' + str(flag) + '.apk')
-    os.system('rm -rf temp_{}'.format(source_dir))
+    #pack_apk(out_dir, source_dir + '_' + str(flag) + '.apk')
+    flag_bin = bin(flag)[2:]
+    flag_bin = '0' * (7 - len(flag_bin)) + flag_bin
+    pack_apk(out_dir, source_dir + '_' + flag_bin  + '.apk')
+    os.system('rm -rf {}'.format(out_dir))
 
 
 if __name__ == '__main__':

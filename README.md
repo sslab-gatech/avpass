@@ -11,6 +11,17 @@ AVPASS offers several useful features to transform any Android malware to bypass
 - Generates targeted obfuscation to bypass specific detection system
 - Supports safe query by using Imitation Mode
 
+DEMO
+----
+
+* Bypassing API-, Dataflor-, Interaction-based detection system
+
+[![DEMO1](http://img.youtube.com/vi/6D1miTSRKA8/0.jpg)](http://www.youtube.com/watch?v=6D1miTSRKA8)
+
+
+* Inferring and Bypassing AVs through VirusTotal
+
+[![DEMO2](http://img.youtube.com/vi/GkMyobbyl88/0.jpg)](http://www.youtube.com/watch?v=GkMyobbyl88)
 
 License
 -------
@@ -24,10 +35,17 @@ Running & Docs
 More documentation is available in [docs/README.md](docs/README.md).
 
 
-Contact
--------
+Authors and Contact
+-------------------
 
-Send us email for any questions.
+These are the list of contributors for implementing AVPASS:
+
+- Jinho Jung
+- Chanil Jeon
+- Max Wolotsky
+- Insu Yun
+
+Send us email for any questions. 
 
 Main contact point: Jinho Jung (jinho.jung@gatech.edu)
 

@@ -67,14 +67,14 @@ We pre-defined several obfuscation modules here. You can modify `OBFUSCATION_LIS
 
 ## Launch individual obfuscation
 
-Let's test with example. Copy `facebook_opt.apk` malware into your `src` directory. Then run this script:
+Let's test with example. Copy any malware into your `src` directory. Then run this script:
 
 ``` 
 # generate one individual obfuscated APK
-$ python gen_disguise.py -i facebook_opt.apk individual
+$ python gen_disguise.py -i YOUR_MALWARE.apk individual
 ```
 
-Then you will see `facebook_opt_obfus.apk` file. 
+Then you will see `YOUR_MALWARE_obfus.apk` file. 
 
 ## Check your obfuscated malware to VirusTotal
 

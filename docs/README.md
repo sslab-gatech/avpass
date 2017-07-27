@@ -1,7 +1,7 @@
 
 # Installation
 
-For the initial version of AVPASS, we assumes that user is using Linux or MAC. However, since we tried to avoid using OS specific commands or libraries, we will support Windows users in the near future. 
+For the initial version of AVPASS, we assumes that user is using Linux or Mac. However, since we tried to avoid using OS specific commands or libraries, we will support Windows users in the near future. 
 
 Visit the main directory of repository and run the script. It will install all necessary libraries. 
 

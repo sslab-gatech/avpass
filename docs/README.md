@@ -1,7 +1,7 @@
 
 # NOTICE
 
-Recently, we add new features (Java reflection, complicate string encryptor) to bypass better. Unfortunately, these new modules are not compatible with some previous modules. We didn't perform test much but we found one case of error. Since Java reflection hide all method names, `pcm` module (package/class/method name changer) can occur error when you run obfuscation APK. To solve this problem, we will quickly provide `pc` module for only obfuscating package and class names when you already used Java reflection. 
+Recently, we add new features (Java reflection, complicate string encryptor) to bypass better. Unfortunately, these new modules are not compatible with some previous modules. We didn't perform test much but we found one case of error. Since Java reflection hide all method names, `pcm` module (package/class/method name changer) can occur error when you run obfuscation APK. To solve this problem, we will quickly provide `pc` module (package/class) for only obfuscating package and class names when you already used Java reflection. 
 
 Until the release, we recommend you not to use Java reflection with `pcm` module. If you just try to infer AVs feature, it's fine to use because apktool can compile the smali into APK anyway. 
 
@@ -23,6 +23,31 @@ If this script doesn't work for your envorinment and if you find any problem reg
   * magic: https://pypi.python.org/pypi/python-magic
   * python-utils: https://pypi.python.org/pypi/python-utils/2.1.0
   * vt: https://pypi.python.org/pypi/virustotal-api
+
+We recommend you to make sure whether two tools (`apktool` and `vt`) are working correctly. If you execute commands, you should see these messages. 
+
+```
+$ apktool
+
+Apktool v2.2.3 - a tool for reengineering Android apk files
+with smali v2.2.1 and baksmali v2.2.1
+Copyright 2014 Ryszard Wiśniewski <brut.alll@gmail.com>
+Updated by Connor Tumbleson <connor.tumbleson@gmail.com>
+
+```
+
+```
+$ vt -h
+
+usage: value [-h] [-fi] [-udb USERDB] [-fs] [-f] [-fr] [-u] [-ur] [-d] [-i]
+             [-w] [-s] [-si] [-et] [-ac] [-gc] [-v] [-j] [--csv] [-rr] [-rj]
+             [-V] [-r] [-wh] [-wht] [-pdns] [--asn] [-aso] [--country]
+             [--subdomains] [--domain-siblings] [-cat] [-alc] [-alk] [-opi]
+             [--drweb-cat] [-adi] [-wdi] [-tm] [-wt] [-bd] [-wd] [-du]
+             [--pcaps] [--samples] [-dds] [-uds] [-dc] [-uc] [-drs] [-urs]
+             [-pe] [-esa SAVE_ATTACHMENT] [-peo]
+             [value [value ...]]
+```
 
 ____
 

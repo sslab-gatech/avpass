@@ -263,9 +263,9 @@ Here, `0` indicates that the specific feature has not included into the fake mal
 
 # Limitations
 
-AVPASS has several limitation you should know. 
+AVPASS has several limitation that you should know. 
 
-- AVPASS does not handle payload inside (especially files in /resource, /assets, /libs). We recommend the developer to develop code inside of your class as possible and then AVPASS will obfuscate your code. 
+- AVPASS does not handle payload inside (especially APK/JAR/so/ZIP files in /resource, /assets, /libs). We recommend the developer to develop code inside of your class as possible and then AVPASS will obfuscate your code. 
 
 - AVPASS is vulnerable to dynamic analysis. No matter how much you obfuscate, dynamic analysis will eventually find out original intention. 
 

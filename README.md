@@ -35,10 +35,16 @@ Running & Docs
 More documentation is available in [docs/README.md](docs/README.md).
 
 
-Contact
--------
+Authors and Contact
+-------------------
 
-Send us email for any questions.
+These are the list of contributors for implementing AVPASS:
+Jinho Jung
+Chanil Jeon
+Max Wolotsky
+Insu Yun
+
+Send us email for any questions. 
 
 Main contact point: Jinho Jung (jinho.jung@gatech.edu)
 

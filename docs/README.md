@@ -115,14 +115,14 @@ Going back to the topic, you can query in console:
 
 ``` 
 # Upload obfuscated APK
-$ vt -f facebook_opt_obfus.apk -j 
+$ vt -f YOUR_MALWARE.apk -j 
 ```
 
 After about one minute, your can query the result using command:
 
 ```
 # Check the result
-$ vt -fs facebook_opt_obfus.apk -j 
+$ vt -fs YOUR_MALWARE.apk -j 
 ```
 
 Finally, you will get result file (JSON format) and check which AV detected your obfuscated malware. 

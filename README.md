@@ -55,3 +55,17 @@ Contribute
 
 If you want to contribute, please pick up something from our [Github issues](https://github.com/sslab-gatech/avpass/issues).
 
+Cite
+----
+- Black Hat USA 2017
+
+```
+@inproceedings{jung:avpass-bh,
+  title        = {{AVPASS: Leaking and Bypassing Antivirus Detection Model Automatically (to appear)}},
+  author       = {Jinho Jung and Chanil Jeon and Max Wolotsky and Insu Yun and Taesoo Kim},
+  booktitle    = {Black Hat USA Briefings (Black Hat USA)},
+  month        = jul,
+  year         = 2017,
+  address      = {Las Vegas, NV},
+}
+```

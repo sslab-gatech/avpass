@@ -429,7 +429,7 @@ if __name__ == '__main__':
         elif arg == 'all-all':
             for i in xrange(128):
                 print source_dir, i
-                do_add(source_dir, out_dir, i)
+                do_add(source_dir, empty_dir, out_dir, i)
             exit(0)
         elif arg == 'string':
             flag |= ADD_STRING

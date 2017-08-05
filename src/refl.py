@@ -19,6 +19,8 @@ import conf
 from common import *
 from template_api import *
 
+wrap_name = 'dfjWBxc' # arbitrary
+
 def scan_smali_all(smali):
     "scan smali files and return list"
 
@@ -593,7 +595,8 @@ class Ref(object):
         for line in line_array:
             if is_invoke(line):
                 wrapper = Wrapper(line)
-                wrapper.name = 'dfjWBxc{}'.format(count)
+                wrap_name = wrap_name + '{}'
+                wrapper.name = wrap_name.format(count)
                 wrapper.path = filename
                 wrapper.methodclass = smali_classname
                 wrapper.key = wrapper.name + wrapper.path

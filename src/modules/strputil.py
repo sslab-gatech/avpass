@@ -201,13 +201,13 @@ def ret_new_encrypt_method(methodname, encrypted_string, key):
 
     return new_method
 
-def is_blacklist(input):
-    if input in blacklist:
+def is_blacklist(input, blacklist_arr):
+    if input in blacklist_arr:
         return True
     else:
         return False
 
-def inj_code_all(chunk, classname, blacklist):
+def inj_code_all(chunk, classname, blacklist_arr):
     """
     Inject required code into chunk     
     """
@@ -225,14 +225,14 @@ def inj_code_all(chunk, classname, blacklist):
     
     for line in lines_chunk:
         if "const-string" in line:
-            reg, ori_string = ret_string_reg(line, blacklist)
+            reg, ori_string = ret_string_reg(line)
 
             # if empty string => skip
             if len(ori_string) < 1:
                 new_chunk.append(line)
                 continue
 
-            if is_blacklist(ori_string, blacklist) == True:
+            if is_blacklist(ori_string, blacklist_arr) == True:
                 new_chunk.append(line)
                 continue
 

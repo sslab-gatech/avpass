@@ -26,7 +26,7 @@ import fnmatch, re
 import string
 
 sys.path.append('./modules')
-import conf
+from conf import *
 import smali_tool
 from common import *
 from strputil import *

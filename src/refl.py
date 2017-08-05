@@ -19,7 +19,7 @@ import conf
 from common import *
 from template_api import *
 
-wrap_name = 'dfjWBxc' # arbitrary
+wrapname = 'dfjBWdc' # arbitrary
 
 def scan_smali_all(smali):
     "scan smali files and return list"
@@ -97,6 +97,11 @@ def __next(x):
         raise Exception(x)
     return left, right
 
+def is_blacklist(input, blacklist_arr):
+    if input in blacklist_arr:
+        return True
+    else:
+        return False
 
 def get_arg_types(line):
 
@@ -595,7 +600,13 @@ class Ref(object):
         for line in line_array:
             if is_invoke(line):
                 wrapper = Wrapper(line)
-                wrap_name = wrap_name + '{}'
+
+                # add blacklist functionality
+                if is_blacklist(wrapper.meth_name, conf.BLACKLIST_API):
+                    new_array.append(line)
+                    continue
+
+                wrap_name = wrapname + '{}'
                 wrapper.name = wrap_name.format(count)
                 wrapper.path = filename
                 wrapper.methodclass = smali_classname

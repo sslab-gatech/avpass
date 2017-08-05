@@ -328,7 +328,8 @@ class Strp(object):
             current_con = self.read_content(index)
             current_file = self.smali_path[index] +"/"+ self.smali_filename[index]    #full path
 
-            if process_string_all(self.smali, current_file, self.assets_filename) is True:
+            if process_string_all(self.smali, current_file, \
+                self.assets_filename, BLACKLIST_STRING) is True:
                 count = count + 1
         print "[*] Done processing %d files => modified %d files" % (len(self.smali_filename), count)
         self.cleanUp(self.should_cleanup)

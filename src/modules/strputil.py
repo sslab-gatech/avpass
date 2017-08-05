@@ -11,6 +11,7 @@ from strp_templete import *
 MAX_REG = 16
 STR_USING_REG = 2 # for base64_decode
 global_method_list = []
+method_num = 5638 # arbitrary number
 
 def ret_reg_num(line):
     "Return number of reg"
@@ -103,7 +104,7 @@ def remove_string_field(headchunk):
 
     return modified_chunk
 
-def process_string_all(smali, filename, assetnames):
+def process_string_all(smali, filename, assetnames, blacklist):
     """
     Insert string encryption method for each const-string
     """
@@ -130,7 +131,8 @@ def process_string_all(smali, filename, assetnames):
 
 
     for chunk in func_array:        
-        chunk, new_method_chunks = inj_code_all(chunk, classname)
+        chunk, new_method_chunks = \
+            inj_code_all(chunk, classname, blacklist)
 
         chunk_array.append(chunk)
         for item in new_method_chunks:
@@ -199,7 +201,13 @@ def ret_new_encrypt_method(methodname, encrypted_string, key):
 
     return new_method
 
-def inj_code_all(chunk, classname):
+def is_blacklist(input):
+    if input in blacklist:
+        return True
+    else:
+        return False
+
+def inj_code_all(chunk, classname, blacklist):
     """
     Inject required code into chunk     
     """
@@ -212,17 +220,21 @@ def inj_code_all(chunk, classname):
 
     lines_chunk = ret_lined_list(chunk)
     method_name = ret_method_name_from_chunk(lines_chunk)
-    method_index = 5638 # just arbitrary number
+    method_index = method_num # just arbitrary number
 
     
     for line in lines_chunk:
         if "const-string" in line:
-            reg, ori_string = ret_string_reg(line)
+            reg, ori_string = ret_string_reg(line, blacklist)
 
             # if empty string => skip
             if len(ori_string) < 1:
-            	new_chunk.append(line)
-            	continue
+                new_chunk.append(line)
+                continue
+
+            if is_blacklist(ori_string, blacklist) == True:
+                new_chunk.append(line)
+                continue
 
             # smalitool cannot handle "\" so we just skip this => no choice
             # TODO. is there any way to handle this?

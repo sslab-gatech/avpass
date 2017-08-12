@@ -11,6 +11,12 @@ AVPASS offers several useful features to transform any Android malware so it can
 - Targeted obfuscation to bypass a specific detection system
 - Safe query support by using Imitation Mode
 
+DISCLAIMER
+----------
+All the code provided on this repository is for educational/research purposes only. Any actions and/or activities related to the material contained within this repository is solely your responsibility. The misuse of the code in this repository can result in criminal charges brought against the persons in question. The authors and SSLab group will not be held responsible in the event any criminal charges be brought against any individuals misusing the code in this repository to break the law.
+(Disclaimer taken from: [here](http://learnhacking.in/disclaimer.html))
+
+
 DEMO
 ----
 

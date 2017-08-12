@@ -1,4 +1,0 @@
-include *.py
-include LICENSE
-include test/testdata/*
-include test/*.sh

@@ -11,6 +11,7 @@ import argparse
 import fnmatch, re
 import string
 from StringIO import StringIO
+import random
 from random import randint
 
 sys.path.append('./modules')
@@ -19,7 +20,9 @@ import conf
 from common import *
 from template_api import *
 
-wrapname = 'dfjBWdc' # arbitrary
+def gen_random_string():
+    return ''.join([random.choice(string.lowercase + string.uppercase) \
+                        for _ in range(16)])
 
 def scan_smali_all(smali):
     "scan smali files and return list"
@@ -593,7 +596,6 @@ class Ref(object):
                 break
         if smali_classname == '':
             raise Exception(filename)
-        count = 0
 
         mark = False
         new_array = []
@@ -606,8 +608,7 @@ class Ref(object):
                     new_array.append(line)
                     continue
 
-                wrap_name = wrapname + '{}'
-                wrapper.name = wrap_name.format(count)
+                wrapper.name = gen_random_string()
                 wrapper.path = filename
                 wrapper.methodclass = smali_classname
                 wrapper.key = wrapper.name + wrapper.path
@@ -637,7 +638,6 @@ class Ref(object):
                 newline = get_wrapped_line(line, wrapper)
                 new_array.append(newline)
                 self.wrappers[wrapper.key] = wrapper
-                count += 1
             else:
                 new_array.append(line)
                 

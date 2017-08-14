@@ -16,7 +16,7 @@ PCM            = "python pcm.py  -f {1}.apk package -c no;"
 BYTECODE       = "python pcm.py  -f {1}.apk insbyte -c no;" 
 BENIGN_CLASS   = "python pcm.py  -f {1}.apk bclass -c no;"
 RESOURCE_IMAGE = "python res.py  -f {1} image -c no;"
-RESOURCE_XML   = "python res.py  -f {1} resxml -c no -n no;"
+RESOURCE_XML   = "python res.py  -f {1} resxml -c no -n yes;"
 API_INTER      = "python api.py  -f {1}.apk inter -a android -c no;"
 BEN_PERMISSION = "python api.py  -f {1}.apk bpermission -c no;"
 API_REFLECTION = "python refl.py -f {1}.apk reflect -c no;"
@@ -40,8 +40,9 @@ OBFUSCATION_LIST = [API_REFLECTION, STRING, VARIABLE,\
 #OBFUSCATION_LIST = [API_REFLECTION]
 
 # Inferring Group
-INFERRING_LIST  = [API_REFLECTION, STRING, VARIABLE, PCM, BENIGN_CLASS, \
-                   RESOURCE_IMAGE+RESOURCE_XML, RM_PERMISSION]
+#INFERRING_LIST  = [API_REFLECTION, STRING, VARIABLE, PCM, BENIGN_CLASS, \
+#                   RESOURCE_IMAGE+RESOURCE_XML, RM_PERMISSION]
+INFERRING_LIST = [RESOURCE_IMAGE+RESOURCE_XML]
 
 BLACKLIST_STRING = []  # e.g., '134-333-1234', 'http://mal.com'
 BLACKLIST_API    = []  # e.g., 'toString'

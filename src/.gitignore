@@ -1,3 +1,7 @@
+/out2
+/in2
+/temp
+*.bak
 /temp*
 install.sh
 /malware

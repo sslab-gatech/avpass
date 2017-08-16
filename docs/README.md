@@ -1,9 +1,9 @@
 
 # NOTICE
 
-Recently, we add new features (Java reflection, complicate string encryptor) to bypass better. Unfortunately, these new modules are not compatible with some previous modules. We didn't perform test much but we found one case of error. Since Java reflection hide all method names, `pcm` module (package/class/method name changer) can occur error when you run obfuscation APK. To solve this problem, we will quickly provide `pc` module (package/class) for only obfuscating package and class names when you already used Java reflection. 
+Recently, we add new features (Java reflection, more complicated string encryptor) to bypass AVs better. Unfortunately, these new modules are not compatible with some previous modules. We didn't perform test much but we found one case of error. Since Java reflection hide all method names, `pcm` module (package/class/method name changer) can occur error when you run obfuscation APK. To solve this problem, we will quickly provide `package` module (package changer) for only obfuscating package when you already used Java reflection. 
 
-Until the release, we recommend you not to use Java reflection with `pcm` module. If you just try to infer AVs feature, it's fine to use because apktool can compile the smali into APK anyway. 
+Until the release, we recommend you use `pcm` module before the `Java reflection`. If you just try to infer AVs feature, it's fine to use without considering the order because apktool can compile the smali into APK anyway. 
 
 # Installation
 

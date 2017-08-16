@@ -3,6 +3,7 @@
 import base64
 import smali_tool
 import itertools
+import random
 
 from common import *
 from template_api import *
@@ -11,7 +12,11 @@ from strp_templete import *
 MAX_REG = 16
 STR_USING_REG = 2 # for base64_decode
 global_method_list = []
-method_num = 5638 # arbitrary number
+#method_num = 5638 # arbitrary number
+
+def ret_fourdigit_random():
+    number = random.randint(2000,9999)
+    return number
 
 def ret_reg_num(line):
     "Return number of reg"
@@ -220,7 +225,7 @@ def inj_code_all(chunk, classname, blacklist_arr):
 
     lines_chunk = ret_lined_list(chunk)
     method_name = ret_method_name_from_chunk(lines_chunk)
-    method_index = method_num # just arbitrary number
+    method_index = ret_fourdigit_random()
 
     
     for line in lines_chunk:

@@ -79,10 +79,10 @@ def union_from_target(rulefile, target_name):
 	for name in target_name:
 		try:
 			temp =  storedrule[name]
+			output = np.vstack((output, temp))
 		except:
 			pass
-		output = np.vstack((output, temp))
-
+		
 	output = np.delete(output, (0), axis=0) # remove 1-row
 	unique_out =  unique_rows(output)
 	return unique_out

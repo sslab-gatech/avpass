@@ -36,22 +36,19 @@ def ret_combination(number):
 
 def execute_selected_obfuscation(lists, apkname):
 	for item in lists:
-		print ret_command(INFERRING_LIST[item] ,apkname)		
-		os.system(ret_command(INFERRING_LIST[item] ,apkname))
+		print ret_command(INFERRING_LIST[item], apkname)
 
 def extract_smali(indir, target):
 	if not os.path.exists(target):
 		print "[*] Decoding apk file to smali"
-		#os.system('apktool d ./'+target+'.apk -o' + indir+"/"+target)
-		os.system('apktool d ./'+indir+"/"+target+'.apk -o' + indir+"/"+target)
+		print 'apktool d ./'+indir+"/"+target+'.apk -o' + indir+"/"+target
 
 def build_apk(target, name, postfix):
 	filename = name + "_" + postfix + ".apk"
 	print "Generating %s" % filename
-	os.system('apktool b '+ target + " -o " + filename)
+	print 'apktool b '+ target + " -o " + filename
 	
 if __name__ == "__main__":
-
 	#### DEFINE PARSER
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-i", "--inputdir", dest="indir", type=str,

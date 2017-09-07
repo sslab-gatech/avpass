@@ -50,6 +50,7 @@ These are the list of contributors for implementing AVPASS:
 - Chanil Jeon
 - Max Wolotsky
 - Insu Yun
+- Arbis Arthur Batenburg
 
 Send us email for any questions. 
 

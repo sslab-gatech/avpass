@@ -2,4 +2,5 @@ Jinho Jung <jinho.jung -at- gatech.edu>
 Chanil Jeon <chanil.jeon -at- cc.gatech.edu>
 Max Wolotsky <mwolotsky -at- gatecu.edu>
 Insu Yun <insu -at- gatech.edu>
+Arbis Arthur Batenburg <arbarba -at- protonmail.com>
 

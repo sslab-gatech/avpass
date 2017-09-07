@@ -204,7 +204,7 @@ You can do targeted obfuscation using this command:
 
 ```
 # Run targeted obfuscation
-$ python gen_disguise -i YOUR_MALWARE withrule -o OUTPUT_DIR
+$ python gen_disguise.py -i YOUR_MALWARE withrule -o OUTPUT_DIR
 ```
 
 If there is no problem so far, you will see this question from command line. 

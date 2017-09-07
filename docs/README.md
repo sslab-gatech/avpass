@@ -157,7 +157,7 @@ $ mkdir output
 MODIFY YOUR conf.py
 
 $ cp YOUR_MALWARE ./input/
-$ python gen_variations -i input -o output
+$ python gen_variations.py -i input -o output
 ```
 
 ## Query to VirusTotal

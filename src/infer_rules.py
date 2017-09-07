@@ -293,6 +293,8 @@ if __name__ == "__main__":
 	apklist = load_filelist_with_extension(indir, "apk")
 	jsonlist = load_filelist_with_extension(indir, "json")
 	avlist = return_avlist(jsonlist)
+
+        generate_sha1sum(indir, apklist)
 	
 	sha_to_file, file_to_sha = load_sha1_table(sha1_path)
 	family_names = ret_family_names(sha1_path)

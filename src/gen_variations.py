@@ -164,16 +164,6 @@ if __name__ == "__main__":
     # generate all combinations
     og.run(obfuscations=conf.INFERRING_LIST)
     # og.run(custom=[
-    #     'KN',
-    #     'B', #'I', 'X', 'N',
-    #     ##########
-    #     #'AVSKERP'
-    #     ##########
-    #     # 'VSKERP'
-    #     # 'ASKERP'
-    #     # 'AVKERP'
-    #     # 'AVSERP'
-    #     # 'AVSKRP'
-    #     # 'AVSKEP'
-    #     # 'AVSKER'
+    #      'AVSKEP'
+    #      'AVSKER'
     # ])

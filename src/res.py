@@ -134,7 +134,7 @@ class Res(object):
     def resxml_obfuscation(self):
         """
         Change string, id, drawable, &c in XML
-    	"""
+        """
 
         print "[*] XML in resource obfuscation"
 
@@ -175,7 +175,7 @@ class Res(object):
                 process_strings_xml(item, should_null_string)
 
             elif 'main.xml' in item:
-            	process_main_xml(item, should_null_string)
+                process_main_xml(item, should_null_string)
 
     def string_obfuscation(self):
 

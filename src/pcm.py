@@ -50,9 +50,9 @@ class PCM(object):
             - the class_list is scanned at the initial stage
         """
 
-    	if classname in self.class_list:
-    		return True
-    	return False
+        if classname in self.class_list:
+            return True
+        return False
 
     def check_classname_startswith(self, classname):
         """
@@ -370,10 +370,10 @@ class PCM(object):
 
     def method_obfuscation(self):
         """
-    	Method name obfuscation in invoke-families and fields
-    	   ->function() ==> ->encrypt()
-    	   Lclass; => Lencrypt;
-    	   field: => encrypt_field:
+        Method name obfuscation in invoke-families and fields
+           ->function() ==> ->encrypt()
+           Lclass; => Lencrypt;
+           field: => encrypt_field:
 
         [invoke pattern handling]
             1. check -> 
@@ -405,7 +405,7 @@ class PCM(object):
             #for line in open(full_path,'r').readlines():
                 changed = False
 
-            	"invoke_pattern change ->"
+                "invoke_pattern change ->"
                 # 1. check ->
                 if ";->" in line:
 
@@ -449,7 +449,7 @@ class PCM(object):
                 
                 # .field definition pattern?
                 elif '.field ' in line:
-               	    "find field definition section"
+                       "find field definition section"
                     
                     # TODO : have to handle corner case with double LL
                     # e.g., .field public static final IAB_LEADERBOARD:Lcom/google/ads/AdSize;
@@ -517,7 +517,7 @@ class PCM(object):
         scan_class_names(self.target, self.smali_path, self.smali_filename)
 
     def load_source(self):
-    	"Load smalifile list"
+        "Load smalifile list"
 
         extract_smali(self.target)
         #logging.info("METHOD:Loading Smali files list", extra={ 'tag' : {} })
@@ -569,7 +569,7 @@ class PCM(object):
 
 if __name__ == "__main__":
 
-	#define parser
+    #define parser
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", dest="apk_filename", type=str,
                                  default=None, help="This is the name of APK")
@@ -578,7 +578,7 @@ if __name__ == "__main__":
 
     # modify package/class
     cp = subparsers.add_parser('package', help='Modify user-defined \
-    	class/package name', add_help=False)
+        class/package name', add_help=False)
     cp.add_argument("-c", "--cleanup", dest="cleanup", type=str, default=None,
                     choices=['yes', 'no'], required=True)
     cp.set_defaults(action='package')

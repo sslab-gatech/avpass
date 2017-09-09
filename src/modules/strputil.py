@@ -99,10 +99,10 @@ def remove_string_field(headchunk):
     new_chunk = []
 
     for line in lines_chunk:
-    	if '.field' in line and 'Ljava/lang/String;' in line\
-    	    and "\"" in line:
-    	    continue
-    	new_chunk.append(line)
+        if '.field' in line and 'Ljava/lang/String;' in line\
+            and "\"" in line:
+            continue
+        new_chunk.append(line)
     new_chunk.append('\n')
 
     modified_chunk = '\n'.join(new_chunk)
@@ -141,9 +141,9 @@ def process_string_all(smali, filename, assetnames, blacklist):
 
         chunk_array.append(chunk)
         for item in new_method_chunks:
-        	chunk_array.append(item)
+            chunk_array.append(item)
         if len(new_method_chunks) > 0:
-        	mark = True
+            mark = True
 
     output = head + '\n'.join(chunk_array)
 
@@ -154,22 +154,22 @@ def process_string_all(smali, filename, assetnames, blacklist):
     return mark
 
 def ret_method_name_from_chunk(lines_chunk):
-	"Return method name from chunk"
+    "Return method name from chunk"
 
-	for line in lines_chunk:
-		if '.method ' in line:
-			first_half = line.split('(')[0]
-			name = first_half.split(' ')[len(first_half.split(' '))-1]
+    for line in lines_chunk:
+        if '.method ' in line:
+            first_half = line.split('(')[0]
+            name = first_half.split(' ')[len(first_half.split(' '))-1]
 
-			name = name.replace('<','')
-			name = name.replace('>','')
-			return name
-	return None
+            name = name.replace('<','')
+            name = name.replace('>','')
+            return name
+    return None
 
 def ret_string_reg(line):
     """
-	return reg and string
-	 e.g., const-string v1, "a"
+    return reg and string
+     e.g., const-string v1, "a"
       reg = v1
       string = "a"
     """
@@ -221,7 +221,7 @@ def inj_code_all(chunk, classname, blacklist_arr):
     new_method_name = ""
 
     #if 'java/util/regex/' in chunk:
-    #	return chunk, []
+    #    return chunk, []
 
     lines_chunk = ret_lined_list(chunk)
     method_name = ret_method_name_from_chunk(lines_chunk)
@@ -244,29 +244,29 @@ def inj_code_all(chunk, classname, blacklist_arr):
             # smalitool cannot handle "\" so we just skip this => no choice
             # TODO. is there any way to handle this?
             if "\\" in ori_string:
-            	new_chunk.append(line)
-            	continue
+                new_chunk.append(line)
+                continue
 
             key = random_string()
             encrypted_xor = xor_two_str(ori_string, key) 
             encrypted_string = base64.b64encode(encrypted_xor)
             
-            while True:            	
-            	method_index += 1
-            	new_method_name = method_name + str(method_index)
+            while True:                
+                method_index += 1
+                new_method_name = method_name + str(method_index)
                 
                 if new_method_name not in global_method_list:
-                	break
+                    break
 
             global_method_list.append(new_method_name)
 
             #change line
             line = switch_line_to_ret_string(line, classname, \
-            	new_method_name, reg)
+                new_method_name, reg)
 
             #new method chunk
             new_method = ret_new_encrypt_method(new_method_name,
-            	encrypted_string, key)
+                encrypted_string, key)
             new_method_chunks.append(new_method)
 
             #apply change to new chunk
@@ -419,26 +419,26 @@ def caesar_str(line):
     return line
 
 def gen_classnames(package_dir, enc_filename, num_encryptor, num_postfix):
-	"""
-	Doesn't necessary now
-	"""
+    """
+    Doesn't necessary now
+    """
 
-	output = []
-	post = num_postfix
+    output = []
+    post = num_postfix
 
-	for x in range(num_encryptor):
-		name = package_dir + enc_filename + str(post) + ".smali"
-		output.append(name)
-		post += 1
+    for x in range(num_encryptor):
+        name = package_dir + enc_filename + str(post) + ".smali"
+        output.append(name)
+        post += 1
 
-	return output
+    return output
 
 def gen_enc_class_files(encryptors, keys):
-	"""
-	Doesn't necessary now
-	"""
+    """
+    Doesn't necessary now
+    """
 
-	for i in range(len(encryptors)):
-		f = open(encryptors[i], 'w')
-		f.write(keys[i])
-		f.close()
+    for i in range(len(encryptors)):
+        f = open(encryptors[i], 'w')
+        f.write(keys[i])
+        f.close()

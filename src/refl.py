@@ -22,7 +22,7 @@ from template_api import *
 
 def gen_random_string():
     return ''.join([random.choice(string.lowercase + string.uppercase) \
-                        for _ in range(16)])
+                    for _ in range(16)])
 
 def scan_smali_all(smali):
     "scan smali files and return list"
@@ -115,10 +115,10 @@ def get_arg_types(line):
     while True:
         left, line = __next(line)
         if left is None: break
-        
+
         arg_types.append(left)
         arg_index.append(index_now)
-        
+
         if left[0] in 'L[ZBSCIF':
             incr = 1
         elif left[0] in 'JD':
@@ -237,7 +237,7 @@ class Wrapper(object):
             self.sv = 'virtual'
         else:
             self.sv = None
-        
+
         self.regs = regs
 
         self.arg_string = api.split('(')[1].split(')')[0]
@@ -260,7 +260,7 @@ class Wrapper(object):
         self.text = None
 
         return
-        
+
 
     def gen_wrapper(self):
         template_head = """
@@ -286,8 +286,8 @@ class Wrapper(object):
     sget-object v1, {param_type_obj}->TYPE:Ljava/lang/Class;
     aput-object v1, v2, v0"""
 
-    # this could be defined by both const-class & Object.getClass().
-    # check both
+        # this could be defined by both const-class & Object.getClass().
+        # check both
         template_cls_type = """
     # parameter {index}: {param_type}
     const/16 v0, {index_hex}
@@ -328,7 +328,7 @@ class Wrapper(object):
     invoke-static/range {{p{index_param1} .. p{index_param2}}}, {param_type_obj}->valueOf({param_type}){param_type_obj}
     move-result-object v3
     aput-object v3, v1, v2"""
-    
+
         template_tail_invoke_virtual = """
     # invoke
     invoke-virtual {{v0, p0, v1}}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"""
@@ -372,11 +372,11 @@ class Wrapper(object):
 .end method"""
 
         arg_string = (self.cls_type if self.sv == 'virtual' else '') \
-                      + self.arg_string
+                     + self.arg_string
 
         head = template_head.format(
             cls_type=self.cls_type,
-            name=self.name, 
+            name=self.name,
             arg_types=self.arg_types,
             arg_string=arg_string,
             ret_type=self.ret_type,
@@ -388,17 +388,17 @@ class Wrapper(object):
         for i in xrange(len(self.arg_types)):
             if is_primitive(self.arg_types[i]):
                 middle = middle \
-                    + template_cls_type_primitive.format(
-                        index=i,
-                        param_type=self.arg_types[i],
-                        index_hex=hex(i),
-                        param_type_obj=primitive_to_object[self.arg_types[i]])
+                         + template_cls_type_primitive.format(
+                    index=i,
+                    param_type=self.arg_types[i],
+                    index_hex=hex(i),
+                    param_type_obj=primitive_to_object[self.arg_types[i]])
             else:
                 middle = middle \
-                    + template_cls_type.format(
-                        index=i,
-                        param_type=self.arg_types[i],
-                        index_hex=hex(i))
+                         + template_cls_type.format(
+                    index=i,
+                    param_type=self.arg_types[i],
+                    index_hex=hex(i))
 
         middle = middle + template_middle.format(
             meth_name=self.meth_name,
@@ -408,28 +408,28 @@ class Wrapper(object):
         for i in xrange(len(self.arg_types)):
             if is_primitive_wide(self.arg_types[i]):
                 middle = middle \
-                    + template_middle_primitive_wide.format(
-                        index=i,
-                        index_param1=self.index_param[i],
-                        index_param2=self.index_param[i] + 1,
-                        param_type=self.arg_types[i],
-                        index_hex=hex(i),
-                        param_type_obj=primitive_to_object[self.arg_types[i]])
+                         + template_middle_primitive_wide.format(
+                    index=i,
+                    index_param1=self.index_param[i],
+                    index_param2=self.index_param[i] + 1,
+                    param_type=self.arg_types[i],
+                    index_hex=hex(i),
+                    param_type_obj=primitive_to_object[self.arg_types[i]])
             elif is_primitive(self.arg_types[i]):
                 middle = middle \
-                    + template_middle_primitive.format(
-                        index=i,
-                        index_param=self.index_param[i],
-                        param_type=self.arg_types[i],
-                        index_hex=hex(i),
-                        param_type_obj=primitive_to_object[self.arg_types[i]])
+                         + template_middle_primitive.format(
+                    index=i,
+                    index_param=self.index_param[i],
+                    param_type=self.arg_types[i],
+                    index_hex=hex(i),
+                    param_type_obj=primitive_to_object[self.arg_types[i]])
             else:
                 middle = middle \
-                    + template_middle_object.format(
-                        index=i,
-                        index_param=self.index_param[i],
-                        param_type=self.arg_types[i],
-                        index_hex=hex(i))
+                         + template_middle_object.format(
+                    index=i,
+                    index_param=self.index_param[i],
+                    param_type=self.arg_types[i],
+                    index_hex=hex(i))
 
         if self.sv == 'static':
             tail = template_tail_invoke_static.format()
@@ -437,7 +437,7 @@ class Wrapper(object):
             tail = template_tail_invoke_virtual.format()
         else:
             raise Exception(self.sv)
-        
+
         if self.ret_type[0] in 'L[':
             tail = tail + template_tail_object.format(
                 ret_type = self.ret_type)
@@ -459,7 +459,7 @@ class Wrapper(object):
         self.text = head + middle + tail
         return
 
-        
+
 class Ref(object):
     def __init__(self, apk, api_name, per_num, wantCleanup):
         self.target = apk.split('.')[0]
@@ -566,7 +566,7 @@ class Ref(object):
             current_con = open(current_file).readlines() #read file => lines
         return current_con
 
-    
+
     def process_reflection(self, index):
         """
         do reflection & generate a set of wrappers FOR EACH file.
@@ -580,9 +580,9 @@ class Ref(object):
         calls in each method / file / package / etc.. In this implementation 
         we chose (1).
         """
-        
-        filename = "{}/{}/{}".format(self.smali, 
-                                     self.smali_path[index], 
+
+        filename = "{}/{}/{}".format(self.smali,
+                                     self.smali_path[index],
                                      self.smali_filename[index])
         #print "Opening %s" % filename
 
@@ -614,7 +614,7 @@ class Ref(object):
                 wrapper.key = wrapper.name + wrapper.path
                 wrapper.gen_wrapper()
 
-################################################################################
+                ################################################################################
                 if self.public_checker.is_method_in_class(
                         wrapper.meth_name,
                         wrapper.cls_type[1:].strip(';')):
@@ -627,20 +627,20 @@ class Ref(object):
                         continue
                 else:
                     if wrapper.cls_type.startswith('Ljava/') or \
-                       wrapper.cls_type.startswith('Landroid/'):
+                            wrapper.cls_type.startswith('Landroid/'):
                         pass
                     else:
                         # what is this case?
                         new_array.append(line)
                         continue
-################################################################################
+                    ################################################################################
                 mark = True
                 newline = get_wrapped_line(line, wrapper)
                 new_array.append(newline)
                 self.wrappers[wrapper.key] = wrapper
             else:
                 new_array.append(line)
-                
+
         output = '\n'.join(new_array)
 
         ofile = open(filename, 'w')
@@ -690,7 +690,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", dest="apk_filename", type=str,
-                                 default=None, help="This is the name of APK")
+                        default=None, help="This is the name of APK")
 
     # Create the subparser group
     subparsers = parser.add_subparsers(title='arguments')

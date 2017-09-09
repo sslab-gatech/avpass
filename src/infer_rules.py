@@ -45,9 +45,9 @@ def ret_num_of_zeros(numpy_arr):
 def return_only_filename(filename):
     """remove dot from input filename"""
     output = filename
-    
+
     if '/' in output:
-        output = output.split('/')[len(output.split('/'))-1]    
+        output = output.split('/')[len(output.split('/'))-1]
     return output
 
 def return_json_filename(sha1hash):
@@ -58,7 +58,7 @@ def generate_sha1sum(indir, filelist):
 
     for filename in filelist:
         file = open(filename, 'r')
-        data = file.read()        
+        data = file.read()
 
         sha1Hash = sha1(data)
         wfile.write(sha1Hash.hexdigest()+"  "+return_only_filename(filename)+"\n")
@@ -125,7 +125,7 @@ def infer_rule(avlist, familylist):
             except:
                 print "Error processing %s" % FILENAME
                 pass
-            
+
             temp = filtered.sum(axis=0)[0:NUM_FEATURE]
             filtered = np.delete(filtered, [NUM_FEATURE], axis=1).astype(int)
 
@@ -255,7 +255,7 @@ def gen_csv(family_names, indir, sha1_path):
                 continue
 
             combination_list = file_to_combination_list(apkname)
-            
+
             for key in jsonobj['scans'].keys():
                 result = ret_boolean(jsonobj['scans'][key]['detected'])
                 combination_result = combination_list + [result]
@@ -271,13 +271,13 @@ if __name__ == "__main__":
     #### DEFINE PARSER #######################
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--inputdir", dest="indir", type=str,
-                                 default=None, 
-                                 help="Input dir with APK and JSON", required=True)
+                        default=None,
+                        help="Input dir with APK and JSON", required=True)
     parser.add_argument("-o", "--output-file", dest="outfile", type=str,
-                                 default=None, help="APK output directory")
+                        default=None, help="APK output directory")
     args = parser.parse_args()
 
-    indir = args.indir    
+    indir = args.indir
     if args.outfile == None:
         outfile = DEFAULT_OUTPUT
     else:
@@ -294,11 +294,9 @@ if __name__ == "__main__":
     jsonlist = load_filelist_with_extension(indir, "json")
     avlist = return_avlist(jsonlist)
 
-        generate_sha1sum(indir, apklist)
-    
     sha_to_file, file_to_sha = load_sha1_table(sha1_path)
     family_names = ret_family_names(sha1_path)
-    
+
     # generate csv files for each AV and malware faimly
     gen_csv(family_names, indir, sha1_path)
     csvlist = load_filelist_with_extension(indir, "csv")
@@ -307,7 +305,7 @@ if __name__ == "__main__":
     Features = gen_feature_arr()
     rule_out = infer_rule(avlist, family_names)
     rule_out["avlist"] = avlist
-    
+
     # store_array_to_file
     pickle_file = outfile + '.pkl'
     with open(pickle_file, 'wb') as f:

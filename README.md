@@ -68,7 +68,7 @@ Cite
 
 ```
 @inproceedings{jung:avpass-bh,
-  title        = {{AVPASS: Leaking and Bypassing Antivirus Detection Model Automatically (to appear)}},
+  title        = {{AVPASS: Leaking and Bypassing Antivirus Detection Model Automatically}},
   author       = {Jinho Jung and Chanil Jeon and Max Wolotsky and Insu Yun and Taesoo Kim},
   booktitle    = {Black Hat USA Briefings (Black Hat USA)},
   month        = jul,

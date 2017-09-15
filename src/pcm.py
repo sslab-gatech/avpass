@@ -32,7 +32,7 @@ class PCM(object):
         self.target = apk.split('.')[0]
         self.smali = self.target + "/smali"
         self.output_name = self.target + '_pert.apk'
-        self.cleanup = want_cleanup        
+        self.cleanup = want_cleanup
         self.packname = ""
 
         self.smali_filename = []
@@ -50,9 +50,9 @@ class PCM(object):
             - the class_list is scanned at the initial stage
         """
 
-    	if classname in self.class_list:
-    		return True
-    	return False
+        if classname in self.class_list:
+            return True
+        return False
 
     def check_classname_startswith(self, classname):
         """
@@ -62,7 +62,7 @@ class PCM(object):
         if classname == 'android':
             return False
 
-        for item in self.class_list:       
+        for item in self.class_list:
             if item.startswith(classname):
                 out = True
         return out
@@ -90,20 +90,20 @@ class PCM(object):
                     temp = names[i].split('/R')[0]
                     newname = rot13(temp)
                     line = line.replace('L'+temp+'/R', \
-                        'L'+newname+'/R') 
-                
-                # handling double reference case
+                                        'L'+newname+'/R')
+
+                    # handling double reference case
                 # e.g., "Landroid/util/SparseArray<Landroid/support/v4/app/Fragment;>;"
                 #elif '' in line:                
                 #    pass
 
                 else:
                     newname = rot13(names[i])
-                    line = line.replace('L'+names[i]+';', 'L'+newname+';') 
-        
-        #if 'obrfcwr/giddcfh/j7/odd/OddQcndohOqhwjwhm' in line:
-            #android/support/v7/app/AppCompatActivity
-            #logging.info(names)
+                    line = line.replace('L'+names[i]+';', 'L'+newname+';')
+
+                    #if 'obrfcwr/giddcfh/j7/odd/OddQcndohOqhwjwhm' in line:
+                    #android/support/v7/app/AppCompatActivity
+                    #logging.info(names)
 
         return line
 
@@ -113,15 +113,15 @@ class PCM(object):
           ex) synteo/spysat/R$layout => gmbhsc/gdmgoh/R$layout
         """
         names = find_classname_from_line(line)[0]
-        
+
         if names.endswith('/R'):
             names = names[:-2]
         else:
-            names = names.split('/R$')[0]        
-          
+            names = names.split('/R$')[0]
+
         if self.check_classname_exist(names) is True:
             newname = rot13(names)
-            line = line.replace(names+';', newname+';') 
+            line = line.replace(names+';', newname+';')
         return line
 
 
@@ -168,17 +168,17 @@ class PCM(object):
                 tag = tag.split('>')[0]
         tag2 = tag.replace('.', '/')
         if self.check_classname_exist(tag2) is True:
-            line = line.replace(tag, rot13(tag))        
+            line = line.replace(tag, rot13(tag))
 
-        # e.g., xmlns:wiyun="http://schemas.android.com/apk/res/com.virsir.android.chinamobile10086">
+            # e.g., xmlns:wiyun="http://schemas.android.com/apk/res/com.virsir.android.chinamobile10086">
         if 'xmlns' in line and 'res/' in line:
             classname = line.split('res/')[1]
-            if '\"' in classname:                
+            if '\"' in classname:
                 classname = classname.split('\"')[0]
                 classname2 = classname.replace('.', '/')
                 if self.check_classname_startswith(classname2) is True:
                     line = line.replace("res/"+classname, \
-                        "res/"+rot13(classname))
+                                        "res/"+rot13(classname))
                     #print line
 
         return line
@@ -199,8 +199,8 @@ class PCM(object):
         for name in filelist:
 
             for line in fileinput.input(name, inplace=1):
-            #target_file = open(name, 'r').readlines()
-            #for line in target_file:
+                #target_file = open(name, 'r').readlines()
+                #for line in target_file:
                 line = self.process_xml_class_reference(line)
                 sys.stdout.write(line)
             fileinput.close()
@@ -220,8 +220,8 @@ class PCM(object):
         # should take out android.support case
         # also should find other corner cases
 
-        change_filename(self.smali_path, self.smali_filename, self.target, TEMP_DIR_NAME)        
-        change_dir(self.smali_path, self.target, TEMP_DIR_NAME)        
+        change_filename(self.smali_path, self.smali_filename, self.target, TEMP_DIR_NAME)
+        change_dir(self.smali_path, self.target, TEMP_DIR_NAME)
         #self.change_Rfile()
         cleanUp(self.cleanup, self.target)
 
@@ -245,14 +245,14 @@ class PCM(object):
         package_name = ret_package_name(self.target+'/AndroidManifest.xml', self.target)
 
         for line in fileinput.input(self.target+'/AndroidManifest.xml', inplace=1):
-        #for line in open(self.target+'/AndroidManifest.xml','r').readlines():
+            #for line in open(self.target+'/AndroidManifest.xml','r').readlines():
 
             # 1. modify main package name
-            if ' package=' in line:                
+            if ' package=' in line:
                 line = line.replace('package=\"'+package_name, \
-                    'package=\"'+rot13(package_name)) 
+                                    'package=\"'+rot13(package_name))
 
-            # 2. modify components name
+                # 2. modify components name
             elif 'android:name=' in line:
                 and_name = ret_android_name(line)
                 target_component = \
@@ -292,19 +292,19 @@ class PCM(object):
 
         if super_name_2 in self.class_to_super.keys():
             super_name_3 = self.class_to_super[super_name_2]
-        
+
         # MEMO: need nicer way to handle second parent and third
         if self.method_list.has_key(classname):
-            target1 = self.method_list[classname] 
+            target1 = self.method_list[classname]
 
         if self.method_list.has_key(super_name):
-            target2 = self.method_list[super_name] 
+            target2 = self.method_list[super_name]
 
         if self.method_list.has_key(super_name_2):
-            target3 = self.method_list[super_name_2] 
+            target3 = self.method_list[super_name_2]
 
         if self.method_list.has_key(super_name_3):
-            target4 = self.method_list[super_name_3] 
+            target4 = self.method_list[super_name_3]
 
         target_class = target1 + target2 + target3 + target4
 
@@ -345,17 +345,17 @@ class PCM(object):
         #    return False
 
         if self.method_list.has_key(classname):
-            target1 = self.method_list[classname] 
+            target1 = self.method_list[classname]
 
         if self.method_list.has_key(super_name):
-            target2 = self.method_list[super_name] 
+            target2 = self.method_list[super_name]
 
-        # MEMO: need nicer way to handle second parent and third
+            # MEMO: need nicer way to handle second parent and third
         if self.method_list.has_key(super_name_2):
-            target3 = self.method_list[super_name_2] 
+            target3 = self.method_list[super_name_2]
 
         if self.method_list.has_key(super_name_3):
-            target4 = self.method_list[super_name_3] 
+            target4 = self.method_list[super_name_3]
 
         target_class = target1 + target2 + target3 + target4
 
@@ -363,7 +363,7 @@ class PCM(object):
         #logging.info(method)
         #logging.info("\n")
         if method+":PUBLICCMETHOD" in target_class or \
-            method+":ETCCMETHOD" in target_class:
+                                method+":ETCCMETHOD" in target_class:
             return True
 
         return False
@@ -396,16 +396,16 @@ class PCM(object):
         print "[*] Method name obfuscation"
 
         for index in range(len(self.smali_path)):
-            full_path = ret_fullpath(self.target, self.smali_path[index],\
-                self.smali_filename[index])
+            full_path = ret_fullpath(self.target, self.smali_path[index], \
+                                     self.smali_filename[index])
             only_filename = self.smali_filename[index]
             #logging.info(only_filename)
-                        
+
             for line in fileinput.input(full_path, inplace=1):
-            #for line in open(full_path,'r').readlines():
+                #for line in open(full_path,'r').readlines():
                 changed = False
 
-            	"invoke_pattern change ->"
+                "invoke_pattern change ->"
                 # 1. check ->
                 if ";->" in line:
 
@@ -418,7 +418,7 @@ class PCM(object):
                         #logging.info(extract_method_name(line))
                         #logging.info(line.strip())                        
                         if self.is_method_in_class(extract_method_name(line), \
-                            left_class_name):
+                                                   left_class_name):
                             line = mod_method_call_name(line).rstrip()+"\n"
 
                     # 3 - change referred field name()
@@ -428,41 +428,41 @@ class PCM(object):
                         if self.check_classname_exist(left_class_name) == True:
 
                             line = mod_field_reference(line)
-                    
+
                     # 4 - change classname()
                     line = self.mod_line_class(line)
 
                     # MEMO for test
                     sys.stdout.write(line)
                     continue
-                
-                elif is_method_pattern(line):                
+
+                elif is_method_pattern(line):
                     ".method pattern change, execpt for blacklist_functions"
                     #logging.info(line.strip())
-                    line = mod_method_define_name(line)+"\n"                    
+                    line = mod_method_define_name(line)+"\n"
                     line = self.mod_line_class(line)
                     #logging.info(line)
 
                     # MEMO for test
                     sys.stdout.write(line)
                     continue
-                
+
                 # .field definition pattern?
                 elif '.field ' in line:
-               	    "find field definition section"
-                    
+                    "find field definition section"
+
                     # TODO : have to handle corner case with double LL
                     # e.g., .field public static final IAB_LEADERBOARD:Lcom/google/ads/AdSize;
                     # L1234:Lcom/a/a/c; => what is between L~; ?
 
                     line = mod_field_define_name(line)
-                    if ':' in line:                        
+                    if ':' in line:
                         first = line.split(':')[0]
                         second = line.split(':')[1:]
                         second = ''.join(second)
-                        
+
                         line = first + ":" + self.mod_line_class(second)
-                    
+
                     # MEMO for test
                     sys.stdout.write(line)
                     continue
@@ -482,7 +482,7 @@ class PCM(object):
                     sys.stdout.write(line)
                     continue
 
-                #elif is_class_reference(line):
+                    #elif is_class_reference(line):
                     """
                     Just using class instance => should handle
                        ex) const-class v1, Lcn/smstelphoneapp/service/STAService
@@ -493,11 +493,11 @@ class PCM(object):
                     #print "debug:class_reference"
                     #if 'obrfcwr/giddcfh/j7/odd/OddQcndohOqhwjwhm' in line:
                     #    logging.info('HERE')
-                
+
                 line = self.mod_line_class(line)
                 sys.stdout.write(line)
             fileinput.close()
-            
+
     def package_obfuscation(self):
         "Previous version: package obfuscation method"
 
@@ -514,10 +514,10 @@ class PCM(object):
 
     def scan_names(self):
         self.class_list, self.method_list, self.class_to_super, self.field_list = \
-        scan_class_names(self.target, self.smali_path, self.smali_filename)
+            scan_class_names(self.target, self.smali_path, self.smali_filename)
 
     def load_source(self):
-    	"Load smalifile list"
+        "Load smalifile list"
 
         extract_smali(self.target)
         #logging.info("METHOD:Loading Smali files list", extra={ 'tag' : {} })
@@ -532,22 +532,22 @@ class PCM(object):
         #print length
 
         for index in range(len(self.smali_path)):
-            full_path = ret_fullpath(self.target, self.smali_path[index],\
-                self.smali_filename[index])
+            full_path = ret_fullpath(self.target, self.smali_path[index], \
+                                     self.smali_filename[index])
             only_filename = self.smali_filename[index]
 
             inside_method = False
 
             for line in fileinput.input(full_path, inplace=1):
-            #for line in open(full_path,'r').readlines():
+                #for line in open(full_path,'r').readlines():
 
-                if (line.startswith('.method') and 'abstract' not in line)\
-                    or '.end array-data' in line:
+                if (line.startswith('.method') and 'abstract' not in line) \
+                        or '.end array-data' in line:
                     inside_method = True
 
                 if line.startswith('.end method') or '.sparse-switch' in line \
-                    or '.annotation ' in line or '.packed-switch' in line \
-                    or '.array-data' in line:
+                        or '.annotation ' in line or '.packed-switch' in line \
+                        or '.array-data' in line:
                     inside_method = False
 
                 if '.param ' in line:
@@ -569,10 +569,10 @@ class PCM(object):
 
 if __name__ == "__main__":
 
-	#define parser
+    #define parser
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", dest="apk_filename", type=str,
-                                 default=None, help="This is the name of APK")
+                        default=None, help="This is the name of APK")
 
     subparsers = parser.add_subparsers(title='arguments')
 
@@ -585,14 +585,14 @@ if __name__ == "__main__":
 
     # insert dummy-byte
     ins = subparsers.add_parser('insbyte', help='Insert dummy bytes', \
-        add_help=False)
+                                add_help=False)
     ins.add_argument("-c", "--cleanup", dest="cleanup", type=str, default=None,
-                    choices=['yes', 'no'], required=True)
+                     choices=['yes', 'no'], required=True)
     ins.set_defaults(action='insbyte')
 
     # insert dummy-byte
     bc = subparsers.add_parser('bclass', help='Insert benign classes', \
-        add_help=False)
+                               add_help=False)
     bc.add_argument("-c", "--cleanup", dest="cleanup", type=str, default=None,
                     choices=['yes', 'no'], required=True)
     bc.set_defaults(action='bclass')
@@ -607,7 +607,7 @@ if __name__ == "__main__":
         pcm = PCM(args.apk_filename, args.cleanup)
         pcm.load_source()
         pcm.scan_names()
-        
+
         pcm.method_obfuscation()
         pcm.mod_manifest()
         pcm.file_obfuscation()
@@ -621,7 +621,7 @@ if __name__ == "__main__":
         pcm = PCM(args.apk_filename, args.cleanup)
         pcm.load_source()
         pcm.insert_bytes(length = 1)
-        cleanUp(pcm.cleanup, pcm.target)        
+        cleanUp(pcm.cleanup, pcm.target)
 
     elif args.action == "bclass":
         pcm = PCM(args.apk_filename, args.cleanup)

@@ -44,6 +44,6 @@ def return_benign_perm(number = 10):
     #print number
     for line in range(number):
         rtn = rtn + PERMISSION_STRING.replace('{1}', \
-        	BENIGN_PERM.splitlines()[random.randint(0,LEN_PERM-1)])+"\n"
+            BENIGN_PERM.splitlines()[random.randint(0,LEN_PERM-1)])+"\n"
 
     return rtn

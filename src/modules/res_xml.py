@@ -44,7 +44,7 @@ def mod_at_manifest(line):
     """
     Modify at@ variable's name
     e.g., <application android:icon="@drawable/icon" 
-      android:label="@string/app_name">	  
+      android:label="@string/app_name">      
 
     corner case#1 
          <application android:icon="@drawable/ic_launcher" 
@@ -72,7 +72,7 @@ def mod_at_manifest(line):
 def process_public_xml(filename):
     "Modify <public> tag, change name=enc"
 
-    #for line in open(filename,'r').readlines():	
+    #for line in open(filename,'r').readlines():    
     for line in fileinput.input(filename, inplace=1):
         if '<public' in line:
             word = line.split('name=\"')[1].split("\"")[0]
@@ -82,11 +82,11 @@ def process_public_xml(filename):
     fileinput.close()
 
 # TODO. handle multiple line <string> tag
-def process_strings_xml(filename, should_null_string):	
+def process_strings_xml(filename, should_null_string):    
     """
     Modify strings.xml 
     1. modify strings name (ID)
-    2. nullify strings by user request	
+    2. nullify strings by user request    
 
     ex) <string name="hello">Hello World</string>
      => <string name="enc"></string>    
@@ -100,7 +100,7 @@ def process_strings_xml(filename, should_null_string):
         if "name=\"" in line:
             word = line.split('name=\"')[1].split("\"")[0]
             line = line.replace('name=\"'+word, 'name=\"'+rot13(word))
-	    
+        
         sys.stdout.write(line)
     fileinput.close()
 
